@@ -1,0 +1,1315 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>⚾ 대한민국 야구 직관 정보 총정리</title>
+    <meta name="description" content="KBO 리그 모든 경기장의 티켓 예매, 경기 일정, 교통 정보, 팀 정보를 한 곳에서 확인하세요. 야구 직관을 위한 완벽한 가이드.">
+    <meta name="keywords" content="야구, 직관, KBO, 티켓예매, 경기일정, 잠실, 고척, 사직, 경기장">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #312e81 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        /* Header Styles */
+        .header {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #312e81 100%);
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.2;
+        }
+        
+        .header-content {
+            position: relative;
+            text-align: center;
+            padding: 4rem 0;
+            color: white;
+        }
+        
+        .header-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 5rem;
+            height: 5rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(8px);
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            margin-bottom: 1.5rem;
+        }
+        
+        .header h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: -0.025em;
+        }
+        
+        .header .subtitle {
+            font-size: 1.5rem;
+            color: #bfdbfe;
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+        
+        .header-tags {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+            color: #bfdbfe;
+        }
+        
+        .header-tag {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Ad Banner Styles */
+        .ad-banner {
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.1));
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 0.75rem;
+            margin: 2rem auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255, 255, 255, 0.6);
+            font-weight: 500;
+        }
+        
+        .ad-banner.large {
+            height: 6rem;
+            font-size: 1.125rem;
+        }
+        
+        .ad-banner.medium {
+            height: 5rem;
+            font-size: 1rem;
+        }
+        
+        .ad-banner.responsive {
+            height: 4rem;
+            font-size: 0.875rem;
+        }
+        
+        @media (min-width: 768px) {
+            .ad-banner.responsive {
+                height: 5rem;
+                font-size: 1rem;
+            }
+        }
+        
+        /* Section Styles */
+        .section {
+            padding: 4rem 0;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-icon {
+            display: inline-flex;
+            margin-bottom: 1rem;
+            color: #fbbf24;
+        }
+        
+        .section h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1rem;
+        }
+        
+        .section p {
+            font-size: 1.25rem;
+            color: #bfdbfe;
+        }
+        
+        /* Grid Styles */
+        .grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+        
+        .grid-cols-1 {
+            grid-template-columns: repeat(1, minmax(0, 1fr));
+        }
+        
+        @media (min-width: 768px) {
+            .grid-cols-2 {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .grid-cols-3 {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+        }
+        
+        @media (min-width: 1280px) {
+            .grid-cols-5 {
+                grid-template-columns: repeat(5, minmax(0, 1fr));
+            }
+        }
+        
+        /* Card Styles */
+        .card {
+            position: relative;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: scale(1.05);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        
+        .card-gradient {
+            position: absolute;
+            inset: 0;
+            border-radius: 0.75rem;
+            opacity: 0.1;
+            transition: opacity 0.3s ease;
+        }
+        
+        .card:hover .card-gradient {
+            opacity: 0.2;
+        }
+        
+        .card-content {
+            position: relative;
+            z-index: 10;
+        }
+        
+        .card h3 {
+            font-weight: 700;
+            color: white;
+            font-size: 1.125rem;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s ease;
+        }
+        
+        .card:hover h3 {
+            color: #fde047;
+        }
+        
+        .card p {
+            color: #bfdbfe;
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+        }
+        
+        .card-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        
+        .card-link:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+        
+        /* Transport Section Specific */
+        .transport-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        
+        .transport-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+        
+        .transport-label {
+            font-size: 0.875rem;
+            color: #d1d5db;
+            font-weight: 500;
+        }
+        
+        .transport-value {
+            color: white;
+        }
+        
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.25rem 0.5rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            border: 1px solid;
+            margin-left: 0.5rem;
+        }
+        
+        .status-good {
+            color: #34d399;
+            background: rgba(52, 211, 153, 0.1);
+            border-color: rgba(52, 211, 153, 0.2);
+        }
+        
+        .status-available {
+            color: #60a5fa;
+            background: rgba(96, 165, 250, 0.1);
+            border-color: rgba(96, 165, 250, 0.2);
+        }
+        
+        .status-busy {
+            color: #fbbf24;
+            background: rgba(251, 191, 36, 0.1);
+            border-color: rgba(251, 191, 36, 0.2);
+        }
+        
+        .status-limited {
+            color: #fb923c;
+            background: rgba(251, 146, 60, 0.1);
+            border-color: rgba(251, 146, 60, 0.2);
+        }
+        
+        .status-difficult {
+            color: #f87171;
+            background: rgba(248, 113, 113, 0.1);
+            border-color: rgba(248, 113, 113, 0.2);
+        }
+        
+        /* Teams Section Specific */
+        .team-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Schedule Section Specific */
+        .schedule-placeholder {
+            aspect-ratio: 16/9;
+            background: linear-gradient(135deg, rgba(30, 58, 138, 0.5), rgba(88, 28, 135, 0.5));
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.7);
+            text-align: center;
+        }
+        
+        .schedule-content {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Alert Box */
+        .alert {
+            background: rgba(251, 191, 36, 0.1);
+            border: 1px solid rgba(251, 191, 36, 0.2);
+            border-radius: 0.75rem;
+            padding: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .alert-content {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: #fbbf24;
+        }
+        
+        .alert p {
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        
+        /* Footer */
+        .footer {
+            padding: 3rem 0;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(8px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .footer-content {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.6);
+            margin-top: 2rem;
+        }
+        
+        .footer p {
+            font-size: 0.875rem;
+        }
+        
+        .footer .small {
+            font-size: 0.75rem;
+            margin-top: 0.5rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .header .subtitle {
+                font-size: 1.25rem;
+            }
+            
+            .section h2 {
+                font-size: 2rem;
+            }
+            
+            .header-tags {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="header-icon">
+                    <i data-lucide="baseline" style="width: 3rem; height: 3rem; color: #fbbf24;"></i>
+                </div>
+                
+                <h1>⚾ 대한민국 야구 직관</h1>
+                <p class="subtitle">정보 총정리</p>
+                
+                <div class="header-tags">
+                    <div class="header-tag">
+                        <i data-lucide="calendar" style="width: 1.25rem; height: 1.25rem;"></i>
+                        <span>실시간 경기 일정</span>
+                    </div>
+                    <div class="header-tag">
+                        <i data-lucide="map-pin" style="width: 1.25rem; height: 1.25rem;"></i>
+                        <span>교통 정보</span>
+                    </div>
+                    <div class="header-tag">
+                        <i data-lucide="users" style="width: 1.25rem; height: 1.25rem;"></i>
+                        <span>팀 정보</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Ad Banner -->
+    <div class="container">
+        <div class="ad-banner large">
+            [728x90] 에드센스 광고 위치 - 헤더 하단
+        </div>
+    </div>
+
+    <main>
+        <!-- Ticket Section -->
+        <section class="section">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-icon">
+                        <i data-lucide="ticket" style="width: 2rem; height: 2rem;"></i>
+                    </div>
+                    <h2>🎫 경기장별 예매 링크</h2>
+                    <p>각 구장별 티켓 예매를 빠르게 진행하세요</p>
+                </div>
+
+                <div class="grid grid-cols-1 grid-cols-2 grid-cols-3 grid-cols-5">
+                    <div class="card">
+                        <div class="card-gradient" style="background: linear-gradient(135deg, #ef4444, #ec4899);"></div>
+                        <div class="card-content">
+                            <h3>잠실야구장</h3>
+                            <p>(LG, 두산)</p>
+                            <a href="#" class="card-link">
+                                <span>예매 바로가기</span>
+                                <i data-lucide="external-link" style="width: 1rem; height: 1rem;"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-gradient" style="background: linear-gradient(135deg, #8b5cf6, #6366f1);"></div>
+                        <div class="card-content">
+                            <h3>고척 스카이돔</h3>
+                            <p>(키움)</p>
+                            <a href="#" class="card-link">
+                                <span>예매 바로가기</span>
+                                <i data-lucide="external-link" style="width: 1rem; height: 1rem;"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-gradient" style="background: linear-gradient(135deg, #374151, #000000);"></div>
+                        <div class="card-content">
+                            <h3>수원 KT 위즈파크</h3>
+                            <p>(KT)</p>
+                            <a href="#" class="card-link">
+                                <span>예매 바로가기</span>
+                                <i data-lucide="external-link" style="width: 1rem; height: 1rem;"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-gradient" style="background: linear-gradient(135deg, #3b82f6, #06b6d4);"></div>
+                        <div class="card-content">
+                            <h3>사직야구장</h3>
+                            <p>(롯데)</p>
+                            <a href="#" class="card-link">
+                                <span>예매 바로가기</span>
+                                <i data-lucide="external-link" style="width: 1rem; height: 1rem;"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-gradient" style="background: linear-gradient(135deg, #2563eb, #1e40af);"></div>
+                        <div class="card-content">
+                            <h3>대구삼성라이온즈파크</h3>
+                            <p>(삼성)</p>
+                            <a href="#" class="card-link">
+                                <span>예매 바로가기</span>
+                                <i data-lucide="external-link" style="width: 1rem; height: 1rem;"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-gradient" style="background: linear-gradient(135deg, #eab308, #f97316);"></div>
+                        <div class="card-content">
+                            <h3>창원NC파크</h3>
+                            <p>(NC)</p>
+                            <a href="#" class="card-link">
+                                <span>예매 바로가기</span>
+                                <i data-lucide="external-link" style="width: 1rem; height: 1rem;"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-gradient" style="background: linear-gradient(135deg, #dc2626, #b91c1c);"></div>
+                        <div class="card-content">
+                            <h3>인천SSG랜더스필드</h3>
+                            <p>(SSG)</p>
+                            <a href="#" class="card-link">
+                                <span>예매 바로가기</span>
+                                <i data-lucide="external-link" style="width: 1rem; height: 1rem;"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-gradient" style="background: linear-gradient(135deg, #ef4444, #dc2626);"></div>
+                        <div class="card-content">
+                            <h3>광주기아챔피언스필드</h3>
+                            <p>(KIA)</p>
+                            <a href="#" class="card-link">
+                                <span>예매 바로가기</span>
+                                <i data-lucide="external-link" style="width: 1rem; height: 1rem;"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-gradient" style="background: linear-gradient(135deg, #f97316, #ef4444);"></div>
+                        <div class="card-content">
+                            <h3>대전이글스파크</h3>
+                            <p>(한화)</p>
+                            <a href="#" class="card-link">
+                                <span>예매 바로가기</span>
+                                <i data-lucide="external-link" style="width: 1rem; height: 1rem;"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-gradient" style="background: linear-gradient(135deg, #10b981, #14b8a6);"></div>
+                        <div class="card-content">
+                            <h3>울산문수야구장</h3>
+                            <p>(간이구장)</p>
+                            <a href="#" class="card-link">
+                                <span>예매 바로가기</span>
+                                <i data-lucide="external-link" style="width: 1rem; height: 1rem;"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Schedule Section -->
+        <section class="section" style="background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.2));">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-icon">
+                        <i data-lucide="calendar" style="width: 2rem; height: 2rem; color: #34d399;"></i>
+                    </div>
+                    <h2>📅 실시간 경기 일정</h2>
+                    <p>경기장별 일정을 실시간으로 확인하세요</p>
+                </div>
+
+                <div class="grid grid-cols-1 grid-cols-2 grid-cols-3">
+                    <div class="card">
+                        <div class="card-content">
+                            <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+                                <i data-lucide="clock" style="width: 1.5rem; height: 1.5rem; color: #60a5fa;"></i>
+                                <h3>잠실야구장</h3>
+                            </div>
+                            
+                            <div class="schedule-content">
+                                <div class="schedule-placeholder">
+                                    <div>
+                                        <i data-lucide="calendar" style="width: 3rem; height: 3rem; opacity: 0.5; margin-bottom: 0.5rem;"></i>
+                                        <p style="font-size: 0.875rem;">경기 일정 로딩 중...</p>
+                                        <p style="font-size: 0.75rem; margin-top: 0.25rem; opacity: 0.75;">실제 구현시 API 연동</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-content">
+                            <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+                                <i data-lucide="clock" style="width: 1.5rem; height: 1.5rem; color: #60a5fa;"></i>
+                                <h3>고척 스카이돔</h3>
+                            </div>
+                            
+                            <div class="schedule-content">
+                                <div class="schedule-placeholder">
+                                    <div>
+                                        <i data-lucide="calendar" style="width: 3rem; height: 3rem; opacity: 0.5; margin-bottom: 0.5rem;"></i>
+                                        <p style="font-size: 0.875rem;">경기 일정 로딩 중...</p>
+                                        <p style="font-size: 0.75rem; margin-top: 0.25rem; opacity: 0.75;">실제 구현시 API 연동</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-content">
+                            <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+                                <i data-lucide="clock" style="width: 1.5rem; height: 1.5rem; color: #60a5fa;"></i>
+                                <h3>수원 KT 위즈파크</h3>
+                            </div>
+                            
+                            <div class="schedule-content">
+                                <div class="schedule-placeholder">
+                                    <div>
+                                        <i data-lucide="calendar" style="width: 3rem; height: 3rem; opacity: 0.5; margin-bottom: 0.5rem;"></i>
+                                        <p style="font-size: 0.875rem;">경기 일정 로딩 중...</p>
+                                        <p style="font-size: 0.75rem; margin-top: 0.25rem; opacity: 0.75;">실제 구현시 API 연동</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-content">
+                            <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+                                <i data-lucide="clock" style="width: 1.5rem; height: 1.5rem; color: #60a5fa;"></i>
+                                <h3>사직야구장</h3>
+                            </div>
+                            
+                            <div class="schedule-content">
+                                <div class="schedule-placeholder">
+                                    <div>
+                                        <i data-lucide="calendar" style="width: 3rem; height: 3rem; opacity: 0.5; margin-bottom: 0.5rem;"></i>
+                                        <p style="font-size: 0.875rem;">경기 일정 로딩 중...</p>
+                                        <p style="font-size: 0.75rem; margin-top: 0.25rem; opacity: 0.75;">실제 구현시 API 연동</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-content">
+                            <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+                                <i data-lucide="clock" style="width: 1.5rem; height: 1.5rem; color: #60a5fa;"></i>
+                                <h3>대구삼성라이온즈파크</h3>
+                            </div>
+                            
+                            <div class="schedule-content">
+                                <div class="schedule-placeholder">
+                                    <div>
+                                        <i data-lucide="calendar" style="width: 3rem; height: 3rem; opacity: 0.5; margin-bottom: 0.5rem;"></i>
+                                        <p style="font-size: 0.875rem;">경기 일정 로딩 중...</p>
+                                        <p style="font-size: 0.75rem; margin-top: 0.25rem; opacity: 0.75;">실제 구현시 API 연동</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-content">
+                            <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+                                <i data-lucide="clock" style="width: 1.5rem; height: 1.5rem; color: #60a5fa;"></i>
+                                <h3>창원NC파크</h3>
+                            </div>
+                            
+                            <div class="schedule-content">
+                                <div class="schedule-placeholder">
+                                    <div>
+                                        <i data-lucide="calendar" style="width: 3rem; height: 3rem; opacity: 0.5; margin-bottom: 0.5rem;"></i>
+                                        <p style="font-size: 0.875rem;">경기 일정 로딩 중...</p>
+                                        <p style="font-size: 0.75rem; margin-top: 0.25rem; opacity: 0.75;">실제 구현시 API 연동</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-content">
+                            <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+                                <i data-lucide="clock" style="width: 1.5rem; height: 1.5rem; color: #60a5fa;"></i>
+                                <h3>인천 SSG랜더스필드</h3>
+                            </div>
+                            
+                            <div class="schedule-content">
+                                <div class="schedule-placeholder">
+                                    <div>
+                                        <i data-lucide="calendar" style="width: 3rem; height: 3rem; opacity: 0.5; margin-bottom: 0.5rem;"></i>
+                                        <p style="font-size: 0.875rem;">경기 일정 로딩 중...</p>
+                                        <p style="font-size: 0.75rem; margin-top: 0.25rem; opacity: 0.75;">실제 구현시 API 연동</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-content">
+                            <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+                                <i data-lucide="clock" style="width: 1.5rem; height: 1.5rem; color: #60a5fa;"></i>
+                                <h3>광주 챔피언스필드</h3>
+                            </div>
+                            
+                            <div class="schedule-content">
+                                <div class="schedule-placeholder">
+                                    <div>
+                                        <i data-lucide="calendar" style="width: 3rem; height: 3rem; opacity: 0.5; margin-bottom: 0.5rem;"></i>
+                                        <p style="font-size: 0.875rem;">경기 일정 로딩 중...</p>
+                                        <p style="font-size: 0.75rem; margin-top: 0.25rem; opacity: 0.75;">실제 구현시 API 연동</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-content">
+                            <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+                                <i data-lucide="clock" style="width: 1.5rem; height: 1.5rem; color: #60a5fa;"></i>
+                                <h3>대전이글스파크</h3>
+                            </div>
+                            
+                            <div class="schedule-content">
+                                <div class="schedule-placeholder">
+                                    <div>
+                                        <i data-lucide="calendar" style="width: 3rem; height: 3rem; opacity: 0.5; margin-bottom: 0.5rem;"></i>
+                                        <p style="font-size: 0.875rem;">경기 일정 로딩 중...</p>
+                                        <p style="font-size: 0.75rem; margin-top: 0.25rem; opacity: 0.75;">실제 구현시 API 연동</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Ad Banner -->
+        <div class="container">
+            <div class="ad-banner medium">
+                [300x250] 광고 위치 - 중간 섹션
+            </div>
+        </div>
+
+        <!-- Transport Section -->
+        <section class="section">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-icon">
+                        <i data-lucide="map-pin" style="width: 2rem; height: 2rem; color: #a855f7;"></i>
+                    </div>
+                    <h2>🚗 직관 가는 교통/주차 안내</h2>
+                    <p>각 경기장까지 가는 가장 편리한 방법을 안내합니다</p>
+                </div>
+
+                <div class="grid grid-cols-1 grid-cols-2 grid-cols-3">
+                    <div class="card">
+                        <div class="card-content">
+                            <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+                                <i data-lucide="train" style="width: 1.5rem; height: 1.5rem; color: #60a5fa;"></i>
+                                <h3>잠실야구장</h3>
+                            </div>
+                            
+                            <div class="transport-info">
+                                <div class="transport-item">
+                                    <i data-lucide="train" style="width: 1.25rem; height: 1.25rem; color: #34d399; margin-top: 0.125rem;"></i>
+                                    <div>
+                                        <p class="transport-label">지하철/버스</p>
+                                        <p class="transport-value">2호선 종합운동장역</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="transport-item">
+                                    <i data-lucide="car" style="width: 1.25rem; height: 1.25rem; color: #60a5fa; margin-top: 0.125rem;"></i>
+                                    <div>
+                                        <p class="transport-label">주차 정보</p>
+                                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                            <p class="transport-value">주차 가능 (혼잡)</p>
+                                            <div class="status-badge status-busy">혼잡</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-content">
+                            <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+                                <i data-lucide="train" style="width: 1.5rem; height: 1.5rem; color: #60a5fa;"></i>
+                                <h3>고척돔</h3>
+                            </div>
+                            
+                            <div class="transport-info">
+                                <div class="transport-item">
+                                    <i data-lucide="train" style="width: 1.25rem; height: 1.25rem; color: #34d399; margin-top: 0.125rem;"></i>
+                                    <div>
+                                        <p class="transport-label">지하철/버스</p>
+                                        <p class="transport-value">1호선 구일역</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="transport-item">
+                                    <i data-lucide="car" style="width: 1.25rem; height: 1.25rem; color: #60a5fa; margin-top: 0.125rem;"></i>
+                                    <div>
+                                        <p class="transport-label">주차 정보</p>
+                                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                            <p class="transport-value">주차 가능</p>
+                                            <div class="status-badge status-available">여유</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-content">
+                            <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+                                <i data-lucide="train" style="width: 1.5rem; height: 1.5rem; color: #60a5fa;"></i>
+                                <h3>수원 위즈파크</h3>
+                            </div>
+                            
+                            <div class="transport-info">
+                                <div class="transport-item">
+                                    <i data-lucide="train" style="width: 1.25rem; height: 1.25rem; color: #34d399; margin-top: 0.125rem;"></i>
+                                    <div>
+                                        <p class="transport-label">지하철/버스</p>
+                                        <p class="transport-value">1호선 세류역/버스 이용</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="transport-item">
+                                    <i data-lucide="car" style="width: 1.25rem; height: 1.25rem; color: #60a5fa; margin-top: 0.125rem;"></i>
+                                    <div>
+                                        <p class="transport-label">주차 정보</p>
+                                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                            <p class="transport-value">주차 가능</p>
+                                            <div class="status-badge status-available">여유</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-content">
+                            <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+                                <i data-lucide="train" style="width: 1.5rem; height: 1.5rem; color: #60a5fa;"></i>
+                                <h3>사직야구장</h3>
+                            </div>
+                            
+                            <div class="transport-info">
+                                <div class="transport-item">
+                                    <i data-lucide="train" style="width: 1.25rem; height: 1.25rem; color: #34d399; margin-top: 0.125rem;"></i>
+                                    <div>
+                                        <p class="transport-label">지하철/버스</p>
+                                        <p class="transport-value">부산 3호선 사직역</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="transport-item">
+                                    <i data-lucide="car" style="width: 1.25rem; height: 1.25rem; color: #60a5fa; margin-top: 0.125rem;"></i>
+                                    <div>
+                                        <p class="transport-label">주차 정보</p>
+                                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                            <p class="transport-value">주차 제한적</p>
+                                            <div class="status-badge status-limited">제한</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-content">
+                            <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+                                <i data-lucide="train" style="width: 1.5rem; height: 1.5rem; color: #60a5fa;"></i>
+                                <h3>대구라이온즈파크</h3>
+                            </div>
+                            
+                            <div class="transport-info">
+                                <div class="transport-item">
+                                    <i data-lucide="train" style="width: 1.25rem; height: 1.25rem; color: #34d399; margin-top: 0.125rem;"></i>
+                                    <div>
+                                        <p class="transport-label">지하철/버스</p>
+                                        <p class="transport-value">지하철 2호선 대공원역</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="transport-item">
+                                    <i data-lucide="car" style="width: 1.25rem; height: 1.25rem; color: #60a5fa; margin-top: 0.125rem;"></i>
+                                    <div>
+                                        <p class="transport-label">주차 정보</p>
+                                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                            <p class="transport-value">주차 혼잡</p>
+                                            <div class="status-badge status-busy">혼잡</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-content">
+                            <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+                                <i data-lucide="car" style="width: 1.5rem; height: 1.5rem; color: #60a5fa;"></i>
+                                <h3>창원NC파크</h3>
+                            </div>
+                            
+                            <div class="transport-info">
+                                <div class="transport-item">
+                                    <i data-lucide="train" style="width: 1.25rem; height: 1.25rem; color: #34d399; margin-top: 0.125rem;"></i>
+                                    <div>
+                                        <p class="transport-label">지하철/버스</p>
+                                        <p class="transport-value">창원중앙역 버스 이동</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="transport-item">
+                                    <i data-lucide="car" style="width: 1.25rem; height: 1.25rem; color: #60a5fa; margin-top: 0.125rem;"></i>
+                                    <div>
+                                        <p class="transport-label">주차 정보</p>
+                                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                            <p class="transport-value">주차장 넉넉함</p>
+                                            <div class="status-badge status-good">넉넉</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-content">
+                            <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+                                <i data-lucide="train" style="width: 1.5rem; height: 1.5rem; color: #60a5fa;"></i>
+                                <h3>인천SSG필드</h3>
+                            </div>
+                            
+                            <div class="transport-info">
+                                <div class="transport-item">
+                                    <i data-lucide="train" style="width: 1.25rem; height: 1.25rem; color: #34d399; margin-top: 0.125rem;"></i>
+                                    <div>
+                                        <p class="transport-label">지하철/버스</p>
+                                        <p class="transport-value">1호선 동암역/버스 연계</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="transport-item">
+                                    <i data-lucide="car" style="width: 1.25rem; height: 1.25rem; color: #60a5fa; margin-top: 0.125rem;"></i>
+                                    <div>
+                                        <p class="transport-label">주차 정보</p>
+                                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                            <p class="transport-value">주차 어려움</p>
+                                            <div class="status-badge status-difficult">어려움</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-content">
+                            <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+                                <i data-lucide="train" style="width: 1.5rem; height: 1.5rem; color: #60a5fa;"></i>
+                                <h3>광주챔피언스필드</h3>
+                            </div>
+                            
+                            <div class="transport-info">
+                                <div class="transport-item">
+                                    <i data-lucide="train" style="width: 1.25rem; height: 1.25rem; color: #34d399; margin-top: 0.125rem;"></i>
+                                    <div>
+                                        <p class="transport-label">지하철/버스</p>
+                                        <p class="transport-value">금남로5가역</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="transport-item">
+                                    <i data-lucide="car" style="width: 1.25rem; height: 1.25rem; color: #60a5fa; margin-top: 0.125rem;"></i>
+                                    <div>
+                                        <p class="transport-label">주차 정보</p>
+                                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                            <p class="transport-value">주차 가능</p>
+                                            <div class="status-badge status-available">여유</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-content">
+                            <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+                                <i data-lucide="car" style="width: 1.5rem; height: 1.5rem; color: #60a5fa;"></i>
+                                <h3>대전이글스파크</h3>
+                            </div>
+                            
+                            <div class="transport-info">
+                                <div class="transport-item">
+                                    <i data-lucide="train" style="width: 1.25rem; height: 1.25rem; color: #34d399; margin-top: 0.125rem;"></i>
+                                    <div>
+                                        <p class="transport-label">지하철/버스</p>
+                                        <p class="transport-value">서대전역 버스 20분</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="transport-item">
+                                    <i data-lucide="car" style="width: 1.25rem; height: 1.25rem; color: #60a5fa; margin-top: 0.125rem;"></i>
+                                    <div>
+                                        <p class="transport-label">주차 정보</p>
+                                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                            <p class="transport-value">주차 가능</p>
+                                            <div class="status-badge status-available">여유</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="alert">
+                    <div class="alert-content">
+                        <i data-lucide="alert-circle" style="width: 1.25rem; height: 1.25rem;"></i>
+                        <p>경기일에는 교통상황이 매우 혼잡할 수 있으니 대중교통 이용을 권장합니다.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Teams Section -->
+        <section class="section" style="background: linear-gradient(180deg, rgba(0, 0, 0, 0.2), transparent);">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-icon">
+                        <i data-lucide="users" style="width: 2rem; height: 2rem; color: #fb923c;"></i>
+                    </div>
+                    <h2>🧢 KBO 팀별 감독/정보</h2>
+                    <p>2024 시즌 각 팀의 지휘봉을 잡은 감독들</p>
+                </div>
+
+                <div class="grid grid-cols-1 grid-cols-2 grid-cols-3 grid-cols-5">
+                    <div class="card">
+                        <div class="card-gradient" style="background: linear-gradient(135deg, #ef4444, #dc2626);"></div>
+                        <div class="card-content" style="text-align: center;">
+                            <div style="display: flex; justify-content: center; margin-bottom: 0.75rem;">
+                                <i data-lucide="crown" style="width: 1.25rem; height: 1.25rem; color: #fbbf24;"></i>
+                            </div>
+                            
+                            <h3 style="margin-bottom: 0.5rem;">LG 트윈스</h3>
+                            
+                            <p style="margin-bottom: 0.75rem;">
+                                감독: <span style="font-weight: 500; color: white;">염경엽</span>
+                            </p>
+                            
+                            <div class="team-status">
+                                <span style="color: rgba(255, 255, 255, 0.8);">우승팀</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-gradient" style="background: linear-gradient(135deg, #dc2626, #b91c1c);"></div>
+                        <div class="card-content" style="text-align: center;">
+                            <div style="display: flex; justify-content: center; margin-bottom: 0.75rem;">
+                                <i data-lucide="trophy" style="width: 1.25rem; height: 1.25rem; color: #fb923c;"></i>
+                            </div>
+                            
+                            <h3 style="margin-bottom: 0.5rem;">SSG 랜더스</h3>
+                            
+                            <p style="margin-bottom: 0.75rem;">
+                                감독: <span style="font-weight: 500; color: white;">이재원 (대행)</span>
+                            </p>
+                            
+                            <div class="team-status">
+                                <span style="color: rgba(255, 255, 255, 0.8);">강팀</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-gradient" style="background: linear-gradient(135deg, #374151, #000000);"></div>
+                        <div class="card-content" style="text-align: center;">
+                            <div style="display: flex; justify-content: center; margin-bottom: 0.75rem;">
+                                <i data-lucide="users" style="width: 1.25rem; height: 1.25rem; color: #60a5fa;"></i>
+                            </div>
+                            
+                            <h3 style="margin-bottom: 0.5rem;">KT 위즈</h3>
+                            
+                            <p style="margin-bottom: 0.75rem;">
+                                감독: <span style="font-weight: 500; color: white;">이강철</span>
+                            </p>
+                            
+                            <div class="team-status">
+                                <span style="color: rgba(255, 255, 255, 0.8);">상승세</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-gradient" style="background: linear-gradient(135deg, #eab308, #f97316);"></div>
+                        <div class="card-content" style="text-align: center;">
+                            <div style="display: flex; justify-content: center; margin-bottom: 0.75rem;">
+                                <i data-lucide="users" style="width: 1.25rem; height: 1.25rem; color: #60a5fa;"></i>
+                            </div>
+                            
+                            <h3 style="margin-bottom: 0.5rem;">NC 다이노스</h3>
+                            
+                            <p style="margin-bottom: 0.75rem;">
+                                감독: <span style="font-weight: 500; color: white;">강인권</span>
+                            </p>
+                            
+                            <div class="team-status">
+                                <span style="color: rgba(255, 255, 255, 0.8);">안정적</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-gradient" style="background: linear-gradient(135deg, #1e40af, #1e3a8a);"></div>
+                        <div class="card-content" style="text-align: center;">
+                            <div style="display: flex; justify-content: center; margin-bottom: 0.75rem;">
+                                <i data-lucide="users" style="width: 1.25rem; height: 1.25rem; color: #60a5fa;"></i>
+                            </div>
+                            
+                            <h3 style="margin-bottom: 0.5rem;">두산 베어스</h3>
+                            
+                            <p style="margin-bottom: 0.75rem;">
+                                감독: <span style="font-weight: 500; color: white;">이승엽</span>
+                            </p>
+                            
+                            <div class="team-status">
+                                <span style="color: rgba(255, 255, 255, 0.8);">베테랑</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-gradient" style="background: linear-gradient(135deg, #8b5cf6, #6366f1);"></div>
+                        <div class="card-content" style="text-align: center;">
+                            <div style="display: flex; justify-content: center; margin-bottom: 0.75rem;">
+                                <i data-lucide="users" style="width: 1.25rem; height: 1.25rem; color: #60a5fa;"></i>
+                            </div>
+                            
+                            <h3 style="margin-bottom: 0.5rem;">키움 히어로즈</h3>
+                            
+                            <p style="margin-bottom: 0.75rem;">
+                                감독: <span style="font-weight: 500; color: white;">홍원기</span>
+                            </p>
+                            
+                            <div class="team-status">
+                                <span style="color: rgba(255, 255, 255, 0.8);">경쟁력</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-gradient" style="background: linear-gradient(135deg, #2563eb, #1e40af);"></div>
+                        <div class="card-content" style="text-align: center;">
+                            <div style="display: flex; justify-content: center; margin-bottom: 0.75rem;">
+                                <i data-lucide="users" style="width: 1.25rem; height: 1.25rem; color: #60a5fa;"></i>
+                            </div>
+                            
+                            <h3 style="margin-bottom: 0.5rem;">삼성 라이온즈</h3>
+                            
+                            <p style="margin-bottom: 0.75rem;">
+                                감독: <span style="font-weight: 500; color: white;">박진만</span>
+                            </p>
+                            
+                            <div class="team-status">
+                                <span style="color: rgba(255, 255, 255, 0.8);">전통강호</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-gradient" style="background: linear-gradient(135deg, #3b82f6, #06b6d4);"></div>
+                        <div class="card-content" style="text-align: center;">
+                            <div style="display: flex; justify-content: center; margin-bottom: 0.75rem;">
+                                <i data-lucide="users" style="width: 1.25rem; height: 1.25rem; color: #60a5fa;"></i>
+                            </div>
+                            
+                            <h3 style="margin-bottom: 0.5rem;">롯데 자이언츠</h3>
+                            
+                            <p style="margin-bottom: 0.75rem;">
+                                감독: <span style="font-weight: 500; color: white;">김태형</span>
+                            </p>
+                            
+                            <div class="team-status">
+                                <span style="color: rgba(255, 255, 255, 0.8);">재건 중</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-gradient" style="background: linear-gradient(135deg, #ef4444, #dc2626);"></div>
+                        <div class="card-content" style="text-align: center;">
+                            <div style="display: flex; justify-content: center; margin-bottom: 0.75rem;">
+                                <i data-lucide="trophy" style="width: 1.25rem; height: 1.25rem; color: #fb923c;"></i>
+                            </div>
+                            
+                            <h3 style="margin-bottom: 0.5rem;">KIA 타이거즈</h3>
+                            
+                            <p style="margin-bottom: 0.75rem;">
+                                감독: <span style="font-weight: 500; color: white;">김종국</span>
+                            </p>
+                            
+                            <div class="team-status">
+                                <span style="color: rgba(255, 255, 255, 0.8);">강팀</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-gradient" style="background: linear-gradient(135deg, #f97316, #ef4444);"></div>
+                        <div class="card-content" style="text-align: center;">
+                            <div style="display: flex; justify-content: center; margin-bottom: 0.75rem;">
+                                <i data-lucide="users" style="width: 1.25rem; height: 1.25rem; color: #60a5fa;"></i>
+                            </div>
+                            
+                            <h3 style="margin-bottom: 0.5rem;">한화 이글스</h3>
+                            
+                            <p style="margin-bottom: 0.75rem;">
+                                감독: <span style="font-weight: 500; color: white;">카를로스 수베로</span>
+                            </p>
+                            
+                            <div class="team-status">
+                                <span style="color: rgba(255, 255, 255, 0.8);">발전 중</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 3rem; text-align: center;">
+                    <div style="background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(8px); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 0.75rem; padding: 1.5rem; display: inline-block;">
+                        <div style="display: flex; align-items: center; gap: 0.75rem; color: #bfdbfe;">
+                            <i data-lucide="trophy" style="width: 1.5rem; height: 1.5rem; color: #fbbf24;"></i>
+                            <p style="font-size: 1.125rem;">
+                                <span style="font-weight: 700; color: white;">2024 시즌</span> 치열한 경쟁이 계속됩니다
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="ad-banner responsive">
+                [반응형] 에드센스 광고 위치 - 푸터 영역
+            </div>
+            
+            <div class="footer-content">
+                <p>© 2024 대한민국 야구 직관 정보. 모든 권리 보유.</p>
+                <p class="small">실시간 정보는 각 구단 공식 사이트를 확인해주세요.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+    </script>
+</body>
+</html>
